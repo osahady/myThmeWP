@@ -21,16 +21,21 @@
 	 <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/assets/css/bootstrap.min.css">
 
 	<!-- Font Awsome Icons -->
-	<link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/assets/css/font-awesome/css/font-awesome.min.css">
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="assets/css/custom.css">
+	
 
 	<!-- Google fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Almarai|Raleway|Tajawal&display=swap" rel="stylesheet">
 
 
 	<?php wp_head(); ?>
+
+	<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body <?php body_class(); ?>>
@@ -54,7 +59,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>                               
                             </button>
-                        <a href="/" class="navbar-brand"><img src="assets/img/logo.png" alt="Bootstrap to Wordpress" srcset=""></a>
+                        <a href="/" class="navbar-brand"><img src="<?php bloginfo('stylesheet_directory') ?>/assets/img/logo.png" alt="Bootstrap to Wordpress" srcset=""></a>
                     </div>
 					<!--  navbar header -->
 					
