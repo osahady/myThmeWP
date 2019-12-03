@@ -24,13 +24,19 @@
  $reason_2_description          = get_field('reason_2_description');
 
 //Who Section
-$who_feature_image              =get_field('who_feature_image');
-$who_section_title              =get_field('who_section_title');
-$who_section_body               =get_field('who_section_body');
+$who_feature_image              = get_field('who_feature_image');
+$who_section_title              = get_field('who_section_title');
+$who_section_body               = get_field('who_section_body');
 
 //Features Section
-$features_section_image         =get_field('features_section_image');
-$features_section_title         =get_field('features_section_title');
+$features_section_image         = get_field('features_section_image');
+$features_section_title         = get_field('features_section_title');
+$features_section_body          = get_field('features_section_body');
+
+
+//Project Features Section
+$project_section_title          = get_field('project_section_title');
+$project_section_body           = get_field('project_section_body');
 
 get_header();
 ?>
@@ -166,43 +172,42 @@ get_header();
     <section id="course-features">
         <div class="container">
             <div class="setion-header">
-                <img src="<?php bloginfo('stylesheet_directory');?>/assets/img/icon-rocket.png" alt="Rocket">
-                <h2>Course Features</h2>
+
+                <?php if (!empty($features_section_image)) : ?>
+                    <img src="<?php echo $features_section_image['url']; ?>" alt="<?php echo $features_section_image['alt']; ?>">
+                <?php endif; ?>
+
+                <h2><?php echo $features_section_title; ?></h2>
+
+                <!-- feature section body (optional) -->
+                <?php if (!empty($features_section_body)) : ?>
+                    <p class="lead"><?php echo $features_section_body; ?></p>
+                <?php endif; ?>
 
             </div>
             <!-- section-header -->
 
+       
+
             <div class="row">
-                <div class="col-sm-2">
-                    <i class="ci ci-computer"></i>
-                    <h4>Lifetime access to 80+ lectures</h4>
-                </div>
-                <!-- col -->
-                <div class="col-sm-2">
-                    <i class="ci ci-watch"></i>
-                    <h4>10+ hours of HD video content</h4>
-                </div>
-                <!-- col -->
-                <div class="col-sm-2">
-                    <i class="ci ci-calender"></i>
-                    <h4>30-day money back guarantee</h4>
-                </div>
-                <!-- col -->
-                <div class="col-sm-2">
-                    <i class="ci ci-community"></i>
-                    <h4>Lifetime access to 80+ lectures</h4>
-                </div>
-                <!-- col -->
-                <div class="col-sm-2">
-                    <i class="ci ci-instructor"></i>
-                    <h4>Lifetime access to 80+ lectures</h4>
-                </div>
-                <!-- col -->
-                <div class="col-sm-2">
-                    <i class="ci ci-device"></i>
-                    <h4>Accessable contents on your mobile devices</h4>
-                </div>
-                <!-- col -->
+
+                <?php $loop = new WP_Query(array(
+                                        'post_type' => 'course_feature',
+                                        'orderby'   => 'post_id',
+                                        'order'     => 'ASC' 
+                ));?>
+
+                <?php while ($loop->have_posts()) : $loop->the_post(); ?>
+                    <div class="col-sm-2">
+                        <i class="<?php the_field('course_feature_icon') ?>"></i>
+                        <h4><?php the_title(); ?></h4>
+                    </div>
+                    <!-- col -->
+                <?php endwhile; ?>
+
+
+                
+                
             </div>
             <!-- row -->
         </div>
@@ -212,11 +217,33 @@ get_header();
         ======================================================= -->
     <section id="project-features">
         <div class="container">
-            <h2>Final Project Features</h2>
-            <p class="lead">Throughout this entire course, you work towards building an incredibly beautiful website. Want to see the website <strong>you</strong> are going to build? <em>You're looking at it!</em> The website you're using right now is the website you
-                will have built entirely by yourself, by the end of this course.</p>
+            <h2><?php echo $project_section_title; ?></h2>
+            <p class="lead"><?php echo $project_section_body; ?></p>
 
             <div class="row">
+                
+               
+                <?php $loop = new WP_Query(array(
+                                        'post_type' => 'project_feature',
+                                        'orderby'   => 'post_id',
+                                        'order'     => 'ASC' 
+                ));?>
+
+                <?php while ($loop->have_posts()) : $loop->the_post(); ?>
+                    <div class="col-sm-4">
+                        <?php if (has_post_thumbnail()) {
+                            the_post_thumbnail();
+                        } ?>
+                        <h3><?php the_title(); ?></h3>
+                        <p><?php the_content(); ?></p>
+                    </div>
+                    <!-- col -->
+
+                <?php endwhile; ?>
+
+
+
+
                 <div class="col-sm-4">
                     <img src="<?php bloginfo('stylesheet_directory');?>/assets/img/icon-design.png" alt="design">
                     <h3>Sexy &amp; Modern Design</h3>
