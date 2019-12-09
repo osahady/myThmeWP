@@ -10,46 +10,57 @@
 get_header();
 ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
-
+	<section class="feature-image feature-image-default-alt" data-type="background" data-speed="2">
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'bootstrap2wordpress' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
-
+							
+		<h1 class="page-title">
 			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+			/* translators: %s: search query. */
+			printf( esc_html__( 'Search Results for: %s', 'bootstrap2wordpress' ), '<span>' . get_search_query() . '</span>' );
+			?>
+		</h1>
+    </section>
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+	<div class="container">
+		<div id="primary" class="row">
+			<main id="content" class="col-sm-8">
+				
+					
 
-			endwhile;
+					<?php
+					/* Start the Loop */
+					while ( have_posts() ) :
+						the_post();
 
-			the_posts_navigation();
+						/**
+						 * Run the loop for the search to output the results.
+						 * If you want to overload this in a child theme then include a file
+						 * called content-search.php and that will be used instead.
+						 */
+						get_template_part( 'template-parts/content', 'search' );
 
-		else :
+					endwhile;
 
-			get_template_part( 'template-parts/content', 'none' );
+					the_posts_navigation();
 
-		endif;
-		?>
+				else :
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+					get_template_part( 'template-parts/content', 'none' );
+
+				endif;
+				?>
+
+			</main><!-- #main -->
+
+			<!-- SIDEBAR
+		========================================================== -->
+			<aside class="col-sm-4">
+				<?php get_sidebar(); ?>
+			</aside>
+		</div><!-- .row -->
+	</div><!-- #primary -->
 
 <?php
-get_sidebar();
+
 get_footer();

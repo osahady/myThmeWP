@@ -751,8 +751,9 @@ section h3 {
     background-size: cover;
 }
 
-.feature-image h1 {
-    display: table-cell;
+.feature-image h1,
+.feature-image .archive-description {
+    display: table-row;
     vertical-align: middle;
     text-align: center;
     color: white;
