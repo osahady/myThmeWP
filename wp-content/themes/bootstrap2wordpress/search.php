@@ -44,9 +44,21 @@ get_header();
 
 					the_posts_navigation();
 
-				else :
+				else : ?>
 
-					get_template_part( 'template-parts/content', 'none' );
+					<h1 class="page-title">
+						<?php
+						/* translators: %s: search query. */
+						printf( esc_html__( 'Search Results for: %s', 'bootstrap2wordpress' ), '<span>' . get_search_query() . '</span>' );
+						?>
+					</h1>
+				</section>
+
+				<div class="container">
+					<div id="primary" class="row">
+						<main id="content" class="col-sm-8">
+
+				<?php	get_template_part( 'template-parts/content', 'none' );
 
 				endif;
 				?>
